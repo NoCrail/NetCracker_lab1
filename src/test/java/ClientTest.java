@@ -1,4 +1,7 @@
+import models.Client;
+import models.Gender;
 import org.junit.Test;
+import utils.DateConverter;
 
 import static org.junit.Assert.*;
 

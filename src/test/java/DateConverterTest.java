@@ -1,4 +1,5 @@
 import org.junit.Test;
+import utils.DateConverter;
 
 import java.util.Date;
 
@@ -9,7 +10,7 @@ public class DateConverterTest {
 
     @Test
     public void stringToDate() {
-        assertEquals(2000-1900 ,DateConverter.stringToDate("10.10.2000").getYear());
+        assertEquals(2000-1900 , DateConverter.stringToDate("10.10.2000").getYear());
     }
 
     @Test

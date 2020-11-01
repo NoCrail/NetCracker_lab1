@@ -3,7 +3,7 @@ import java.util.Date;
 public class Main {
     public static void main(String[] args) {
 //        ContractRepository cr = new ContractRepository();
-//        Contract c = new Contract(0,"10.10.2000", "10.10.2000", "0", new Client(0, "aaa", "10.10.2000", Gender.male, "pass"));
+//        models.Contract c = new models.Contract(0,"10.10.2000", "10.10.2000", "0", new models.Client(0, "aaa", "10.10.2000", models.Gender.male, "pass"));
 //        cr.addContract(c);
 //        cr.addContract(c);
 //        System.out.println(cr.getSize());

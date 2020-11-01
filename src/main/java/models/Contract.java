@@ -1,3 +1,7 @@
+package models;
+
+import utils.DateConverter;
+
 import java.util.Date;
 
 public class Contract {
@@ -8,12 +12,12 @@ public class Contract {
     private Client owner;
 
     /**
-     * Constructor of Contract
-     * @param id unique identifier of each Contract
-     * @param dateBegin date when Contract starts in String format written using pattern "dd.MM.yyyy"
-     * @param dateEnd date when Contract ends in String format written using pattern "dd.MM.yyyy"
-     * @param number number of each Contract
-     * @param owner Contract's owner
+     * Constructor of models.Contract
+     * @param id unique identifier of each models.Contract
+     * @param dateBegin date when models.Contract starts in String format written using pattern "dd.MM.yyyy"
+     * @param dateEnd date when models.Contract ends in String format written using pattern "dd.MM.yyyy"
+     * @param number number of each models.Contract
+     * @param owner models.Contract's owner
      */
     public Contract(Integer id, String dateBegin, String dateEnd, String number, Client owner) {
         this.id = id;
@@ -24,7 +28,7 @@ public class Contract {
     }
 
     /**
-     * Method returns Contract's unique identifier
+     * Method returns models.Contract's unique identifier
      * @return id value
      */
     public Integer getId() {
@@ -32,7 +36,7 @@ public class Contract {
     }
 
     /**
-     * Method returns Contract's start date
+     * Method returns models.Contract's start date
      * @return begin value
      */
     public Date getBeginDate() {
@@ -40,7 +44,7 @@ public class Contract {
     }
 
     /**
-     * Method returns Contract's end date
+     * Method returns models.Contract's end date
      * @return end value
      */
     public Date getEndDate() {
@@ -48,7 +52,7 @@ public class Contract {
     }
 
     /**
-     * Method returns Contract's number
+     * Method returns models.Contract's number
      * @return number value
      */
     public String getNumber() {
@@ -56,7 +60,7 @@ public class Contract {
     }
 
     /**
-     * Method returns Contract's owner
+     * Method returns models.Contract's owner
      * @return owner value
      */
     public Client getOwner() {
@@ -66,7 +70,7 @@ public class Contract {
 
     @Override
     public String toString() {
-        return "Contract{" +
+        return "models.Contract{" +
                 "id=" + id +
                 ", begin=" + beginDate +
                 ", end=" + endDate +

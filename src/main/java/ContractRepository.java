@@ -1,3 +1,5 @@
+import models.Contract;
+
 /**
  * Special repository that can keep Contracts
  */
@@ -9,18 +11,17 @@ public class ContractRepository {
      * Constructor that creates repository
      */
     public ContractRepository(){
-        this.array = new Contract[50];
+        this.array = new Contract[0];
         this.last = -1;
     }
 
     /**
-     * Method that adds new Contract to repository
-     * @param contract Contract that must be added
+     * Method that adds new models.Contract to repository
+     * @param contract models.Contract that must be added
      */
     public void addContract(Contract contract){
         if(last+1>=array.length) extendArray();
-            array[last + 1] = contract;
-            last++;
+            array[++last] = contract;
     }
 
     /**
@@ -34,19 +35,18 @@ public class ContractRepository {
     }
 
     /**
-     * Method that searches Contract in repository
-     * @param id Searching Contract's id
-     * @return Contract if found or null
+     * Method that searches models.Contract in repository
+     * @param id Searching models.Contract's id
+     * @return models.Contract if found or null
      */
     public Contract getContractById(int id){
-        Contract c = null;
         int pos = getPositionById(id);
         if (pos == -1) return null;  else return array[pos];
     }
 
     /**
-     * Method for getting Contract's position in repository by id
-     * @param id Searching Contract's id
+     * Method for getting models.Contract's position in repository by id
+     * @param id Searching models.Contract's id
      * @return position in repository or -1 if not found
      */
     private int getPositionById(int id){
@@ -59,16 +59,14 @@ public class ContractRepository {
     }
 
     /**
-     * Method removes Contract from repository by id
-     * @param id Removing Contract's id
+     * Method removes models.Contract from repository by id
+     * @param id Removing models.Contract's id
      */
-    public void removeById(int id){  //TODO TESTS BORDER
+    public void removeById(int id){
         int pos = getPositionById(id);
         if(pos!=-1) {
-            for (int i = pos; i <= last; i++) {
-                //System.out.println("moved");
-                array[i] = array[i + 1];
-            }
+            //System.out.println("moved");
+            if (last + 1 - pos >= 0) System.arraycopy(array, pos + 1, array, pos, last + 1 - pos);
             last--;
         }
     }

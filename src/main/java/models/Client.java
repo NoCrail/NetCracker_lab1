@@ -1,7 +1,12 @@
+package models;
+
+import utils.DateConverter;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
 
 public class Client {
 
@@ -12,11 +17,11 @@ public class Client {
     private String passport;
 
     /**
-     * Constructor of Client
-     * @param id unique identifier of each Client
-     * @param fullName full name of each Client
+     * Constructor of models.Client
+     * @param id unique identifier of each models.Client
+     * @param fullName full name of each models.Client
      * @param birthday date of birth in String format with pattern "dd.MM.yyyy"
-     * @param gender enum value which shows Client's gender
+     * @param gender enum value which shows models.Client's gender
      * @param passport passport data in String format
      */
     public Client(Integer id, String fullName, String birthday, Gender gender, String passport) {
@@ -28,7 +33,7 @@ public class Client {
     }
 
     /**
-     * Method returns Client's unique identifier
+     * Method returns models.Client's unique identifier
      * @return id value
      */
     public Integer getId() {

@@ -1,3 +1,6 @@
+import models.Client;
+import models.Contract;
+import models.Gender;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
