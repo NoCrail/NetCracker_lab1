@@ -6,8 +6,8 @@ import java.util.Date;
 
 public class Contract {
     private Integer id;
-    private Date beginDate;
-    private Date endDate;
+    private Long beginDate;
+    private Long endDate;
     private String number;
     private Client owner;
 
@@ -19,10 +19,10 @@ public class Contract {
      * @param number number of each models.Contract
      * @param owner models.Contract's owner
      */
-    public Contract(Integer id, String dateBegin, String dateEnd, String number, Client owner) {
+    public Contract(Integer id, Long dateBegin, Long dateEnd, String number, Client owner) {
         this.id = id;
-        this.beginDate = DateConverter.stringToDate(dateBegin);
-        this.endDate = DateConverter.stringToDate(dateEnd);
+        this.beginDate = dateBegin;
+        this.endDate = dateEnd;
         this.number = number;
         this.owner = owner;
     }
@@ -39,7 +39,7 @@ public class Contract {
      * Method returns models.Contract's start date
      * @return begin value
      */
-    public Date getBeginDate() {
+    public Long getBeginDate() {
         return beginDate;
     }
 
@@ -47,7 +47,7 @@ public class Contract {
      * Method returns models.Contract's end date
      * @return end value
      */
-    public Date getEndDate() {
+    public Long getEndDate() {
         return endDate;
     }
 

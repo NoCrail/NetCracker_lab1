@@ -24,6 +24,10 @@ public class DateConverter {
         }
     }
 
+    public static String dateToString(Date date){
+        return new SimpleDateFormat("dd.MM.yyyy").format(date.getTime());
+    }
+
     /**
      * Method counts age of person
      * @param birthday Person's birthday

@@ -1,7 +1,10 @@
 package models;
 
+import utils.DateConverter;
+
 public class TVContract extends Contract {
     private String channelsPackage;
+    private Contract contract;
 
     /**
      * Constructor of models.TVContract
@@ -12,8 +15,12 @@ public class TVContract extends Contract {
      * @param owner models.Contract's owner
      * @param channelsPackage name of channels package that connected in this models.TVContract
      */
-    public TVContract(Integer id, String dateBegin, String dateEnd, String number, Client owner, String channelsPackage) {
+    public TVContract(Integer id, Long dateBegin, Long dateEnd, String number, Client owner, String channelsPackage) {
         super(id, dateBegin, dateEnd, number, owner);
+        this.channelsPackage = channelsPackage;
+    }
+    public TVContract(String channelsPackage,  Contract contract) {
+        super(contract.getId(), contract.getBeginDate(), contract.getEndDate(), contract.getNumber(), contract.getOwner());
         this.channelsPackage = channelsPackage;
     }
 }

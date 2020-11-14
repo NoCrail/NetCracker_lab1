@@ -12,7 +12,7 @@ public class Client {
 
     private Integer id;
     private String fullName;
-    private Date birthday;
+    private Long birthday;
     private Gender gender;
     private String passport;
 
@@ -24,12 +24,12 @@ public class Client {
      * @param gender enum value which shows models.Client's gender
      * @param passport passport data in String format
      */
-    public Client(Integer id, String fullName, String birthday, Gender gender, String passport) {
+    public Client(Integer id, String fullName, Long birthday, Gender gender, String passport) {
         this.id = id;
         this.fullName = fullName;
         this.gender = gender;
         this.passport = passport;
-        this.birthday = DateConverter.stringToDate(birthday);
+        this.birthday = birthday;
     }
 
     /**
@@ -52,7 +52,7 @@ public class Client {
      * Method returns Clent's date of birth
      * @return birthday value
      */
-    public Date getBirthday() {
+    public Long getBirthday() {
         return birthday;
     }
 

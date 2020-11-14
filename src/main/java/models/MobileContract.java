@@ -1,9 +1,12 @@
 package models;
 
+import utils.DateConverter;
+
 public class MobileContract extends Contract {
     private Integer amountOfMinutes;
     private Integer amountOfSMS;
     private Double amountOfTraffic;
+    private Contract contract;
 
     /**
      * Constructor of models.MobileContract
@@ -16,10 +19,28 @@ public class MobileContract extends Contract {
      * @param amountOfSMS amount of SMS that are available in this models.MobileContract
      * @param amountOfTraffic amount of internet traffic that are available in this models.MobileContract
      */
-    public MobileContract(Integer id, String dateBegin, String dateEnd, String number, Client owner, Integer amountOfMinutes, Integer amountOfSMS, Double amountOfTraffic) {
+    public MobileContract(Integer id, Long dateBegin, Long dateEnd, String number, Client owner, Integer amountOfMinutes, Integer amountOfSMS, Double amountOfTraffic) {
         super(id, dateBegin, dateEnd, number, owner);
         this.amountOfMinutes = amountOfMinutes;
         this.amountOfSMS = amountOfSMS;
         this.amountOfTraffic = amountOfTraffic;
+    }
+    public MobileContract(Integer amountOfMinutes, Integer amountOfSMS, Double amountOfTraffic,  Contract contract) {
+        super(contract.getId(), contract.getBeginDate(), contract.getEndDate(), contract.getNumber(), contract.getOwner());
+        this.amountOfMinutes = amountOfMinutes;
+        this.amountOfSMS = amountOfSMS;
+        this.amountOfTraffic = amountOfTraffic;
+    }
+
+    public Double getAmountOfTraffic() {
+        return amountOfTraffic;
+    }
+
+    public Integer getAmountOfSMS() {
+        return amountOfSMS;
+    }
+
+    public Integer getAmountOfMinutes() {
+        return amountOfMinutes;
     }
 }

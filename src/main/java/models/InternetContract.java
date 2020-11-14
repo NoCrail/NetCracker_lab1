@@ -1,8 +1,10 @@
 package models;
 
+import utils.DateConverter;
+
 public class InternetContract extends Contract {
     private Double trafficSpeed;
-
+    private Contract contract;
     /**
      * Constructor of models.InternetContract
      * @param id unique identifier of each models.Contract
@@ -12,8 +14,17 @@ public class InternetContract extends Contract {
      * @param owner models.Contract's owner
      * @param trafficSpeed internet access speed
      */
-    public InternetContract(Integer id, String dateBegin, String dateEnd, String number, Client owner, Double trafficSpeed) {
+    public InternetContract(Integer id, Long dateBegin, Long dateEnd, String number, Client owner, Double trafficSpeed) {
         super(id, dateBegin, dateEnd, number, owner);
         this.trafficSpeed = trafficSpeed;
+    }
+    public InternetContract(Double trafficSpeed,  Contract contract) {
+        super(contract.getId(), contract.getBeginDate(), contract.getEndDate(), contract.getNumber(), contract.getOwner());
+        this.trafficSpeed = trafficSpeed;
+    }
+
+
+    public Double getTrafficSpeed() {
+        return trafficSpeed;
     }
 }

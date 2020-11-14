@@ -1,5 +1,8 @@
 import models.Contract;
 
+import java.util.Comparator;
+import java.util.function.Predicate;
+
 /**
  * Special repository that can keep Contracts
  */
@@ -13,6 +16,15 @@ public class ContractRepository {
     public ContractRepository(){
         this.array = new Contract[0];
         this.last = -1;
+    }
+
+    /**
+     * Constructor that creates repository
+     * @param cr existed ContractRepository
+     */
+    public ContractRepository(ContractRepository cr){
+        this.array = cr.array;
+        this.last = cr.last;
     }
 
     /**
@@ -58,17 +70,33 @@ public class ContractRepository {
         return -1;
     }
 
+    public Contract getByPosition(int position){
+        checkBounds(position);
+        return array[position];
+    }
+
+    public void checkBounds(int position){
+        if((position<0)||(position>last)) throw new IndexOutOfBoundsException("Position = "+position+", Size="+ last+1);
+    }
+
     /**
      * Method removes models.Contract from repository by id
      * @param id Removing models.Contract's id
      */
     public void removeById(int id){
         int pos = getPositionById(id);
-        if(pos!=-1) {
-            //System.out.println("moved");
-            if (last + 1 - pos >= 0) System.arraycopy(array, pos + 1, array, pos, last + 1 - pos);
+        if(pos!=-1){
+            if(pos+1<last){
+            if (pos > 0) System.arraycopy(array, pos+1, array, pos, last   - pos);
+                else System.arraycopy(array, pos+1, array, pos, last-1);
             last--;
+            } else {
+                System.arraycopy(array, pos + 1, array, pos, last + 1 - pos);
+                last--;
+            }
+
         }
+
     }
 
     /**
@@ -80,4 +108,57 @@ public class ContractRepository {
     }
 
 
+    /**
+     * Method creates new repository, that contains filtered Contracts
+     * @param predicate condition for filter
+     * @return new ContractRepository with filtered items
+     */
+    public ContractRepository filter(Predicate<Contract> predicate) {
+        ContractRepository filtered = new ContractRepository();
+
+        for (int i = 0; i < last+1; i++) {
+            Contract element = array[i];
+            if (predicate.test(element))
+                filtered.addContract(element);
+        }
+        return filtered;
+    }
+
+    /**
+     * Method creates new ContractRepository which equals current
+     * @return new ContractRepository
+     */
+    @Override
+    public ContractRepository clone(){
+        try{
+            super.clone();
+        } catch (CloneNotSupportedException ignored) {
+
+        }
+        return new ContractRepository(this);
+    }
+
+
+    /**
+     * Method swaps Contracts in ContractRepository
+     * @param c1 position of first Contract
+     * @param c2 position of second Contract
+     */
+    public void swap(int c1, int c2){
+        checkBounds(c1);
+        checkBounds(c2);
+        Contract temp = array[c1];
+        array[c1]=array[c2];
+        array[c2]=temp;
+    }
+
+    /**
+     * Method sorts ContractRepository with specified params
+     * @param sorter which sort to use
+     * @param comparator condition to compare
+     * @return sorted ContractRepository
+     */
+    public ContractRepository sort(RepositorySorter sorter, Comparator<Contract> comparator){
+        return sorter.sorted(this, 0, last+1, comparator);
+    }
 }
