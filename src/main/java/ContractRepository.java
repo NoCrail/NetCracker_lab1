@@ -9,6 +9,7 @@ import java.util.function.Predicate;
 public class ContractRepository {
     private Contract[] array;
     private int last;
+    private RepositorySorter sorter;
 
     /**
      * Constructor that creates repository
@@ -16,6 +17,7 @@ public class ContractRepository {
     public ContractRepository(){
         this.array = new Contract[0];
         this.last = -1;
+        this.sorter = new QuickSorter();
     }
 
     /**
@@ -25,6 +27,15 @@ public class ContractRepository {
     public ContractRepository(ContractRepository cr){
         this.array = cr.array;
         this.last = cr.last;
+        this.sorter = cr.sorter;
+    }
+
+    /**
+     * Sets repo sorter
+     * @param sorter sorter to set
+     */
+    public void setSorter(RepositorySorter sorter) {
+        this.sorter = sorter;
     }
 
     /**
@@ -154,11 +165,10 @@ public class ContractRepository {
 
     /**
      * Method sorts ContractRepository with specified params
-     * @param sorter which sort to use
      * @param comparator condition to compare
      * @return sorted ContractRepository
      */
-    public ContractRepository sort(RepositorySorter sorter, Comparator<Contract> comparator){
+    public ContractRepository sort(Comparator<Contract> comparator){
         return sorter.sorted(this, 0, last+1, comparator);
     }
 }

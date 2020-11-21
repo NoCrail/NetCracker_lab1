@@ -4,9 +4,9 @@ import java.util.Comparator;
 
 
 /**
- * Realization of fast sorting algorithm
+ * Realization of quick sorting algorithm
  */
-public class FastSorter implements RepositorySorter {
+public class QuickSorter implements RepositorySorter {
     @Override
     public ContractRepository sorted(ContractRepository contractRepository, int startIndex, int count, Comparator<Contract> comparator) {
         ContractRepository sorted = contractRepository.clone();

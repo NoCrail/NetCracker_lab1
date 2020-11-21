@@ -1,7 +1,6 @@
 import models.*;
 import org.junit.Test;
 
-import java.net.URISyntaxException;
 import java.util.Comparator;
 
 import static org.junit.Assert.*;
@@ -76,7 +75,7 @@ public class ContractRepositoryTest {
     public void bubbleSort(){
         ContractRepository cr  = new ContractRepository();
         fillRepo(cr);
-        ContractRepository filtered = cr.sort(new BubbleSorter(), Comparator.comparingInt(Contract::getId));
+        ContractRepository filtered = cr.sort(Comparator.comparingInt(Contract::getId));
         assertEquals(4, (int)filtered.getByPosition(0).getId());
         assertEquals(7, (int)filtered.getByPosition(1).getId());
         assertEquals(8, (int)filtered.getByPosition(2).getId());
@@ -84,10 +83,11 @@ public class ContractRepositoryTest {
     }
 
     @Test
-    public void fastSort(){
+    public void quickSort(){
         ContractRepository cr  = new ContractRepository();
         fillRepo(cr);
-        ContractRepository filtered = cr.sort(new FastSorter(), Comparator.comparingInt(Contract::getId));
+        cr.setSorter(new QuickSorter());
+        ContractRepository filtered = cr.sort(Comparator.comparingInt(Contract::getId));
         assertEquals(4, (int)filtered.getByPosition(0).getId());
         assertEquals(7, (int)filtered.getByPosition(1).getId());
         assertEquals(8, (int)filtered.getByPosition(2).getId());
