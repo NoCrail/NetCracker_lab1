@@ -2,11 +2,11 @@ package models;
 
 public class Client {
 
-    private Integer id;
-    private String fullName;
-    private Long birthday;
-    private Gender gender;
-    private String passport;
+    private final Integer id;
+    private final String fullName;
+    private final Long birthday;
+    private final Gender gender;
+    private final String passport;
 
     /**
      * Constructor of models.Client

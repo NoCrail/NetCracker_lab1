@@ -1,11 +1,10 @@
 package models;
 
 public class Contract {
-    private Integer id;
-    private Long beginDate;
-    private Long endDate;
-    private String number;
-    private Client owner;
+    private final Integer id;
+    private final Long beginDate;
+    private final Long endDate;
+    private final Client owner;
 
     /**
      * Constructor of models.Contract
@@ -13,14 +12,12 @@ public class Contract {
      * @param id        unique identifier of each models.Contract
      * @param dateBegin date when models.Contract starts in String format written using pattern "dd.MM.yyyy"
      * @param dateEnd   date when models.Contract ends in String format written using pattern "dd.MM.yyyy"
-     * @param number    number of each models.Contract
      * @param owner     models.Contract's owner
      */
-    public Contract(Integer id, Long dateBegin, Long dateEnd, String number, Client owner) {
+    public Contract(Integer id, Long dateBegin, Long dateEnd, Client owner) {
         this.id = id;
         this.beginDate = dateBegin;
         this.endDate = dateEnd;
-        this.number = number;
         this.owner = owner;
     }
 
@@ -51,14 +48,6 @@ public class Contract {
         return endDate;
     }
 
-    /**
-     * Method returns models.Contract's number
-     *
-     * @return number value
-     */
-    public String getNumber() {
-        return number;
-    }
 
     /**
      * Method returns models.Contract's owner
@@ -76,7 +65,6 @@ public class Contract {
                 "id=" + id +
                 ", begin=" + beginDate +
                 ", end=" + endDate +
-                ", number='" + number + '\'' +
                 //", owner=" + owner +
                 '}';
     }
