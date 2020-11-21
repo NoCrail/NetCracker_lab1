@@ -1,9 +1,3 @@
-import models.Client;
-import models.Contract;
-import models.Gender;
-
-import java.util.Date;
-
 public class Main {
     public static void main(String[] args) {
         ContractRepository cr = new ContractRepository();

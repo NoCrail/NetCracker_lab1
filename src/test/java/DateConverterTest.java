@@ -3,14 +3,15 @@ import utils.DateConverter;
 
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 public class DateConverterTest {
 
 
     @Test
     public void stringToDate() {
-        assertEquals(2000-1900 , DateConverter.stringToDate("10.10.2000").getYear());
+        assertEquals(2000 - 1900, DateConverter.stringToDate("10.10.2000").getYear());
     }
 
     @Test

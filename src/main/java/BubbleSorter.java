@@ -14,7 +14,7 @@ public class BubbleSorter implements RepositorySorter {
         for (int i = startIndex; i < count; i++)
             for (int j = startIndex + 1; j < (count - i); j++)
                 if (comparator.compare(sorted.getByPosition(j - 1), sorted.getByPosition(j)) > 0)
-                    sorted.swap( j - 1, j);
+                    sorted.swap(j - 1, j);
 
         return sorted;
     }

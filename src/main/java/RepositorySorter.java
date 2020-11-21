@@ -7,4 +7,4 @@ import java.util.Comparator;
  */
 public interface RepositorySorter {
     public ContractRepository sorted(ContractRepository contractRepository, int startIndex, int count, Comparator<Contract> comparator);
-    }
+}

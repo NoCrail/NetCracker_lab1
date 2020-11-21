@@ -2,7 +2,8 @@ import models.Client;
 import models.Gender;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 public class ClientTest {
 
@@ -21,7 +22,7 @@ public class ClientTest {
     @Test
     public void getBirthday() {
         Client client = new Client(0, "test test", 1286668800000L, Gender.MALE, "");
-        assertEquals(1286668800000L, (long)client.getBirthday());
+        assertEquals(1286668800000L, (long) client.getBirthday());
     }
 
     @Test

@@ -1,9 +1,5 @@
 package models;
 
-import utils.DateConverter;
-
-import java.util.Date;
-
 public class Contract {
     private Integer id;
     private Long beginDate;
@@ -13,11 +9,12 @@ public class Contract {
 
     /**
      * Constructor of models.Contract
-     * @param id unique identifier of each models.Contract
+     *
+     * @param id        unique identifier of each models.Contract
      * @param dateBegin date when models.Contract starts in String format written using pattern "dd.MM.yyyy"
-     * @param dateEnd date when models.Contract ends in String format written using pattern "dd.MM.yyyy"
-     * @param number number of each models.Contract
-     * @param owner models.Contract's owner
+     * @param dateEnd   date when models.Contract ends in String format written using pattern "dd.MM.yyyy"
+     * @param number    number of each models.Contract
+     * @param owner     models.Contract's owner
      */
     public Contract(Integer id, Long dateBegin, Long dateEnd, String number, Client owner) {
         this.id = id;
@@ -29,6 +26,7 @@ public class Contract {
 
     /**
      * Method returns models.Contract's unique identifier
+     *
      * @return id value
      */
     public Integer getId() {
@@ -37,6 +35,7 @@ public class Contract {
 
     /**
      * Method returns models.Contract's start date
+     *
      * @return begin value
      */
     public Long getBeginDate() {
@@ -45,6 +44,7 @@ public class Contract {
 
     /**
      * Method returns models.Contract's end date
+     *
      * @return end value
      */
     public Long getEndDate() {
@@ -53,6 +53,7 @@ public class Contract {
 
     /**
      * Method returns models.Contract's number
+     *
      * @return number value
      */
     public String getNumber() {
@@ -61,6 +62,7 @@ public class Contract {
 
     /**
      * Method returns models.Contract's owner
+     *
      * @return owner value
      */
     public Client getOwner() {

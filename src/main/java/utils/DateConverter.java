@@ -12,10 +12,11 @@ public class DateConverter {
 
     /**
      * Method converts Date from String format with pattern "dd.MM.yyyy" to Date
+     *
      * @param date Date in String format with pattern "dd.MM.yyyy"
      * @return converted Date value
      */
-    public static Date stringToDate(String date){
+    public static Date stringToDate(String date) {
         try {
             return new SimpleDateFormat("dd.MM.yyyy").parse(date);
         } catch (ParseException e) {
@@ -24,16 +25,17 @@ public class DateConverter {
         }
     }
 
-    public static String dateToString(Date date){
+    public static String dateToString(Date date) {
         return new SimpleDateFormat("dd.MM.yyyy").format(date.getTime());
     }
 
     /**
      * Method counts age of person
+     *
      * @param birthday Person's birthday
      * @return Person's age
      */
-    public static Integer getAge(Date birthday){
+    public static Integer getAge(Date birthday) {
         long current = System.currentTimeMillis();
         long ageInMillis = current - birthday.getTime();
         Calendar c = Calendar.getInstance();
