@@ -57,6 +57,7 @@ public class ContractParser {
             String contractSource = join(normalValues, ",");
             Contract contract = parser.from(contractSource, parseClass(contractType));
             int errorCount = 0;
+            if(validator!=null)
             for(CheckingResult result: validator.validate(contract) ){
                 if (!result.isValid()) {
                     errorCount++;
