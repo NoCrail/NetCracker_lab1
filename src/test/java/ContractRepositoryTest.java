@@ -1,6 +1,10 @@
 import csvUtils.CSVReader;
 import models.*;
 import org.junit.Test;
+import validators.Condition;
+import validators.Conditions;
+import validators.Validator;
+import validators.ValidatorBuilder;
 
 import java.net.URISyntaxException;
 import java.util.Comparator;
@@ -99,7 +103,7 @@ public class ContractRepositoryTest {
     @Test
     public void testFromFile() throws URISyntaxException {
         ContractParser parser = new ContractParser();
-        ContractRepository contractRepository = parser.parse(CSVReader.getFileFromResource("tableContents.csv"));
+        ContractRepository contractRepository = parser.parse(CSVReader.getFileFromResource("tableContents.csv"), null);
 
         for (int i = 0; i < contractRepository.getSize(); i++)
             assertNotNull(contractRepository.getByPosition(i));
@@ -109,6 +113,24 @@ public class ContractRepositoryTest {
 
         assertEquals(MobileContract.class, contractRepository.getByPosition(1).getClass());
         assertEquals(23, ((MobileContract) contractRepository.getByPosition(1)).getAmountOfTraffic(), 0.1);
+    }
+
+    @Test
+    public void testFromFileValidator() throws URISyntaxException {
+        ContractParser parser = new ContractParser();
+        ValidatorBuilder<Contract> builder = new ValidatorBuilder<>();
+
+        builder.add(new Condition<>(0, Contract::getId, ((expected, actual) -> actual%2==expected)));
+        builder.add(new Condition<>("lera",
+                contract -> contract.getOwner().getFullName()
+        ));
+
+
+        Validator<Contract> v = builder.build();
+        ContractRepository contractRepository = parser.parse(CSVReader.getFileFromResource("tableContents.csv"), v);
+
+        assertEquals(1, contractRepository.getSize());
+        assertNotNull(contractRepository.getContractById(10));
     }
 
 

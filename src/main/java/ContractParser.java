@@ -4,6 +4,8 @@ import models.Contract;
 import models.InternetContract;
 import models.MobileContract;
 import models.TVContract;
+import validators.CheckingResult;
+import validators.Validator;
 
 import java.io.File;
 
@@ -26,7 +28,7 @@ public class ContractParser {
      * @param file csv file to parse
      * @return ContractRepository from csv file
      */
-    public ContractRepository parse(File file) {
+    public ContractRepository parse(File file, Validator<Contract> validator) {
         ContractRepository contractRepository = new ContractRepository();
         CSVReader reader = new CSVReader(file);
         CSVParser parser = new CSVParser();
@@ -53,7 +55,16 @@ public class ContractParser {
             System.arraycopy(sourceValues, 1, normalValues, extra.length, sourceValues.length - 2);
 
             String contractSource = join(normalValues, ",");
-            contractRepository.addContract(parser.from(contractSource, parseClass(contractType)));
+            Contract contract = parser.from(contractSource, parseClass(contractType));
+            int errorCount = 0;
+            for(CheckingResult result: validator.validate(contract) ){
+                if (!result.isValid()) {
+                    errorCount++;
+                    System.err.println(result.getMessage());
+                }
+            }
+            if(errorCount==0)
+                contractRepository.addContract(parser.from(contractSource, parseClass(contractType)));
         }
 
         return contractRepository;

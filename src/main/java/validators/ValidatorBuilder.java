@@ -11,7 +11,7 @@ public class ValidatorBuilder<T> {
         return this;
     }
 
-    public Validator build() {
-        return new Validator(conditions);
+    public Validator<T> build() {
+        return new Validator<T>(conditions);
     }
 }
