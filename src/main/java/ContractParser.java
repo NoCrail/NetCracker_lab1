@@ -1,5 +1,6 @@
 import csvUtils.CSVParser;
 import csvUtils.CSVReader;
+import di.Injector;
 import models.Contract;
 import models.InternetContract;
 import models.MobileContract;
@@ -7,31 +8,28 @@ import models.TVContract;
 import validators.CheckingResult;
 import validators.Validator;
 
+import javax.inject.Inject;
 import java.io.File;
 
 public class ContractParser {
 
+    @Inject
+    private CSVParser parser;
+    @Inject
+    private CSVReader reader;
+    @Inject
+    public Validator<Contract> validator;
 
-    private static String join(Object[] objects, String separator) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < objects.length; i++) {
-            sb.append(objects[i]);
-            if (i != objects.length - 1)
-                sb.append(separator);
-        }
-
-        return sb.toString();
+    public ContractParser(){
+        Injector.inject(this);
     }
 
     /**
      * Creates new ContractRepository with data from csv file
-     * @param file csv file to parse
      * @return ContractRepository from csv file
      */
-    public ContractRepository parse(File file, Validator<Contract> validator) {
+    public ContractRepository parse() {
         ContractRepository contractRepository = new ContractRepository();
-        CSVReader reader = new CSVReader(file);
-        CSVParser parser = new CSVParser();
 
         for (String line : reader.readLines()) {
             String[] sourceValues = line.split(",");
@@ -82,4 +80,16 @@ public class ContractParser {
         }
         return null;
     }
+
+    private static String join(Object[] objects, String separator) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < objects.length; i++) {
+            sb.append(objects[i]);
+            if (i != objects.length - 1)
+                sb.append(separator);
+        }
+
+        return sb.toString();
+    }
+
 }

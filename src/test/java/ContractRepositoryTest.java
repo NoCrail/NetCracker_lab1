@@ -1,5 +1,7 @@
 import csvUtils.CSVReader;
+import di.Injector;
 import models.*;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import validators.Condition;
 import validators.Conditions;
@@ -12,6 +14,9 @@ import java.util.Comparator;
 import static org.junit.Assert.*;
 
 public class ContractRepositoryTest {
+    @BeforeClass public static void init(){
+        Injector.init(AppModule.class);
+    }
 
     public void fillRepo(ContractRepository cr) {
         cr.addContract(new models.Contract(8, 1286668800000L, 1286668800000L, new models.Client(1, "abc", 1286668800000L, models.Gender.MALE, "pass")));
@@ -101,9 +106,10 @@ public class ContractRepositoryTest {
     }
 
     @Test
-    public void testFromFile() throws URISyntaxException {
+    public void testFromFile() {
         ContractParser parser = new ContractParser();
-        ContractRepository contractRepository = parser.parse(CSVReader.getFileFromResource("tableContents.csv"), null);
+        parser.validator=null;
+        ContractRepository contractRepository = parser.parse();
 
         for (int i = 0; i < contractRepository.getSize(); i++)
             assertNotNull(contractRepository.getByPosition(i));
@@ -116,18 +122,10 @@ public class ContractRepositoryTest {
     }
 
     @Test
-    public void testFromFileValidator() throws URISyntaxException {
+    public void testFromFileValidator() {
         ContractParser parser = new ContractParser();
-        ValidatorBuilder<Contract> builder = new ValidatorBuilder<>();
 
-        builder.add(new Condition<>(0, Contract::getId, ((expected, actual) -> actual%2==expected)));
-        builder.add(new Condition<>("lera",
-                contract -> contract.getOwner().getFullName()
-        ));
-
-
-        Validator<Contract> v = builder.build();
-        ContractRepository contractRepository = parser.parse(CSVReader.getFileFromResource("tableContents.csv"), v);
+        ContractRepository contractRepository = parser.parse();
 
         assertEquals(1, contractRepository.getSize());
         assertNotNull(contractRepository.getContractById(10));
